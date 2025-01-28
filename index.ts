@@ -1,5 +1,11 @@
 require('dotenv').config()
+import simpleGit from 'simple-git';
+
 const STORAGE_PATH = process.env.STORAGE_PATH || "./.temp";
+const GIT_PATH     = process.env.GIT_PATH     || "./.gitTemp";
+const GIT_REMOTE   = process.env.GIT_REMOTE; // In SSH format e.g. git@github.com:mmccorm1ck/MSNotes_server.git
+const GIT_USER     = process.env.GIT_USER;
+const GIT_EMAIL    = process.env.GIT_EMAIL;
 
 Bun.serve({
     port: process.env.PORT,
