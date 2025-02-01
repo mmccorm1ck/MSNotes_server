@@ -10,6 +10,7 @@ const GIT_EMAIL    = process.env.GIT_EMAIL;
 const GIT_KEY      = process.env.GIT_KEY; // Personal access token with repo privileges
 const NOTES_FOLDER = process.env.NOTES_FOLDER || "Notes"; // The folder in the repo where notes are saved
 
+if (!GIT_KEY) throw new Error("Personal access token is required");
 const git = simpleGit({
     baseDir: GIT_PATH,
     binary: 'git',
@@ -17,6 +18,9 @@ const git = simpleGit({
         `http.extraHeader=Authorization: Bearer ${GIT_KEY}`
     ]
 });
+if (!GIT_USER || !GIT_EMAIL) throw new Error("Username and email are required");
+git.addConfig('user.name',GIT_USER);
+git.addConfig('user.email', GIT_EMAIL);
 
 Bun.serve({
     port: process.env.PORT,
